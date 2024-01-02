@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class MyListTest {
     @Test(expected = IndexOutOfBoundsException.class)
     public void testMyList() {
-        MyList<Integer> list = new MyList<Integer>();
+        MyList<Integer> list = new MyList<>();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -23,7 +23,7 @@ public class MyListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testNegative() {
-        MyList<Integer> list = new MyList<Integer>();
+        MyList<Integer> list = new MyList<>();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -34,7 +34,7 @@ public class MyListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testList() {
-        ArrayList<Integer> list = new ArrayList<Integer>();
+        ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);
         list.add(3);
