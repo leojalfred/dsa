@@ -20,7 +20,7 @@ public class MyList<E> {
     @SuppressWarnings("unchecked")
     public E get(int i) {
         if (i < 0 || i >= size)
-            throw new IndexOutOfBoundsException("Index: " + i + " Size: " + size);
+            throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + size);
 
         return (E) elements[i];
     }
