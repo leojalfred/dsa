@@ -64,17 +64,32 @@ public class ArrayList<E> {
         return size == 0;
     }
 
-    public boolean contains(E x) {
-        for (Object e : elements)
-            if (e == x) return true;
+    public boolean contains(E e) {
+        for (int i = 0; i < size; i++)
+            if (elements[i] == e) return true;
 
         return false;
     }
 
-    public int find(E x) {
+    public int find(E e) {
         for (int i = 0; i < size; i++)
-            if (elements[i] == x) return i;
+            if (elements[i] == e) return i;
 
         throw new FindException();
+    }
+
+    public void remove(E e) {
+        boolean found = false;
+        for (int i = 0; i < size; i++) {
+            if (!found) {
+                if (elements[i] == e) found = true;
+                continue;
+            }
+
+            elements[i - 1] = elements[i];
+        }
+
+        if (found) size--;
+        else throw new FindException();
     }
 }
