@@ -44,7 +44,7 @@ public class ArrayList<E> {
         System.arraycopy(elements, 0, newElements, 0, index);
         newElements[index] = e;
         System.arraycopy(elements, index, newElements, index + 1, elements.length - index);
-        System.out.println("Doubled array capacity from " + elements.length + " to " + newCapacity);
+        System.out.println("Increased array capacity from " + elements.length + " to " + newCapacity);
 
         elements = newElements;
         size++;
