@@ -1,3 +1,4 @@
+import java.lang.module.FindException;
 import java.util.Arrays;
 
 public class ArrayList<E> {
@@ -14,7 +15,7 @@ public class ArrayList<E> {
         elements = new Object[initialCapacity];
     }
 
-    public void add(Object e) {
+    public void add(E e) {
         if (size == elements.length) {
             int newCapacity = elements.length == 0 ? 1 : 2 * elements.length;
             System.out.println("Increased array capacity from " + elements.length + " to " + newCapacity);
@@ -25,7 +26,7 @@ public class ArrayList<E> {
         size++;
     }
 
-    public void add(int index, Object e) {
+    public void add(int index, E e) {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
 
         if (size < elements.length) {
@@ -68,5 +69,12 @@ public class ArrayList<E> {
             if (e == x) return true;
 
         return false;
+    }
+
+    public int find(E x) {
+        for (int i = 0; i < size; i++)
+            if (elements[i] == x) return i;
+
+        throw new FindException();
     }
 }

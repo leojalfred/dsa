@@ -1,5 +1,7 @@
 import org.junit.Test;
 
+import java.lang.module.FindException;
+
 import static org.junit.Assert.*;
 
 public class ArrayListTest {
@@ -158,5 +160,23 @@ public class ArrayListTest {
         assertEquals(4, list.size());
         assertFalse(list.contains(84));
         assertTrue(list.contains(3));
+    }
+
+    @Test
+    public void findsIndexOfElement() {
+        ArrayList<Integer> list = new ArrayList<>(1);
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(1, 99);
+
+        assertEquals(1, list.find(99));
+    }
+
+    @Test(expected = FindException.class)
+    public void errorsUponNotFindingElementIndex() {
+        ArrayList<Integer> list = new ArrayList<>(1);
+        list.find(345);
     }
 }
