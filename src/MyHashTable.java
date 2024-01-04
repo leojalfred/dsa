@@ -36,9 +36,12 @@ public class MyHashTable<K, V> {
 
     public V get(K key) {
         int i = key.hashCode() % table.length;
-        for (Pair<K, V> pair : table[i])
-            if (pair.getKey() == key)
+        for (Pair<K, V> pair : table[i]) {
+            if (pair.getKey() == key) {
+                System.out.println("Index: " + i + ", Size: " + (table[i].size()));
                 return pair.value;
+            }
+        }
 
         throw new FindException();
     }
