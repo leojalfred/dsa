@@ -9,7 +9,7 @@ public class MyStringBuilder {
     }
 
     public String toString() {
-        char[] characters = new char[100];
+        char[] characters = new char[10];
         int size = 0;
 
         for (String string : strings) {
