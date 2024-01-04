@@ -12,7 +12,7 @@ public class MyStringBuilder {
         char[] characters = new char[100];
         int size = 0;
 
-        for (String string: strings) {
+        for (String string : strings) {
             for (int i = 0; i < string.length(); i++) {
                 if (size == characters.length)
                     characters = Arrays.copyOf(characters, 2 * characters.length);
@@ -22,6 +22,7 @@ public class MyStringBuilder {
             }
         }
 
+        characters = Arrays.copyOfRange(characters, 0, size);
         return new String(characters);
     }
 }
