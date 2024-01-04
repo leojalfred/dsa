@@ -3,10 +3,21 @@ import java.util.LinkedList;
 
 public class MyHashTable<K, V> {
     private static final int DEFAULT_TABLE_CAPACITY = 10;
-    @SuppressWarnings("unchecked")
-    LinkedList<Pair<K, V>>[] table = new LinkedList[DEFAULT_TABLE_CAPACITY];
+    LinkedList<Pair<K, V>>[] table;
 
+    @SuppressWarnings("unchecked")
     MyHashTable() {
+        table = new LinkedList[DEFAULT_TABLE_CAPACITY];
+        init();
+    }
+
+    @SuppressWarnings("unchecked")
+    MyHashTable(int capacity) {
+        table = new LinkedList[capacity];
+        init();
+    }
+
+    private void init() {
         for (int i = 0; i < table.length; i++)
             table[i] = new LinkedList<>();
     }
