@@ -4,10 +4,10 @@ import java.lang.module.FindException;
 
 import static org.junit.Assert.*;
 
-public class ArrayListTest {
+public class MyArrayListTest {
     @Test
     public void canGetAndSetFromDefaultCapacity() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(1);
         list.add(2);
@@ -20,7 +20,7 @@ public class ArrayListTest {
 
     @Test
     public void canGetAndSetIncreasingFromDefaultCapacity() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(1);
         list.add(2);
@@ -41,19 +41,19 @@ public class ArrayListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void errorsOnNegativeOutOfBoundsGet() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
         list.get(-4);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void errorsOnPositiveOutOfBoundsGet() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
         list.get(100);
     }
 
     @Test
     public void canGetAndSetFromInitialCapacity() {
-        ArrayList<Integer> list = new ArrayList<>(5);
+        MyArrayList<Integer> list = new MyArrayList<>(5);
 
         list.add(1);
         list.add(2);
@@ -66,7 +66,7 @@ public class ArrayListTest {
 
     @Test
     public void canGetAndSetIncreasingFromInitialCapacity() {
-        ArrayList<Integer> list = new ArrayList<>(0);
+        MyArrayList<Integer> list = new MyArrayList<>(0);
 
         list.add(1);
         list.add(2);
@@ -79,12 +79,12 @@ public class ArrayListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void errorsOnNegativeInitialCapacity() {
-        new ArrayList<>(-1);
+        new MyArrayList<>(-1);
     }
 
     @Test
     public void sizeReturnsExpectedValue() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         assertEquals(0, list.size());
 
@@ -100,13 +100,13 @@ public class ArrayListTest {
 
     @Test
     public void isEmptyIsTrueBeforeAdding() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
         assertTrue(list.isEmpty());
     }
 
     @Test
     public void isEmptyIsFalseAfterAdding() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
         list.add(1);
 
         assertFalse(list.isEmpty());
@@ -114,7 +114,7 @@ public class ArrayListTest {
 
     @Test
     public void containsExpectedValue() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
         list.add(123);
 
         assertTrue(list.contains(123));
@@ -122,7 +122,7 @@ public class ArrayListTest {
 
     @Test
     public void doesNotContainUnexpectedValue() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
         list.add(123);
 
         assertFalse(list.contains(321));
@@ -130,7 +130,7 @@ public class ArrayListTest {
 
     @Test
     public void insertsAtIndexWithoutIncreasingCapacity() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(1);
         list.add(2);
@@ -147,7 +147,7 @@ public class ArrayListTest {
 
     @Test
     public void insertsAtIndexIncreasingCapacity() {
-        ArrayList<Integer> list = new ArrayList<>(0);
+        MyArrayList<Integer> list = new MyArrayList<>(0);
 
         list.add(1);
         list.add(2);
@@ -164,7 +164,7 @@ public class ArrayListTest {
 
     @Test
     public void findsElement() {
-        ArrayList<Integer> list = new ArrayList<>(1);
+        MyArrayList<Integer> list = new MyArrayList<>(1);
 
         list.add(1);
         list.add(2);
@@ -176,13 +176,13 @@ public class ArrayListTest {
 
     @Test(expected = FindException.class)
     public void errorsUponNotFindingElement() {
-        ArrayList<Integer> list = new ArrayList<>(1);
+        MyArrayList<Integer> list = new MyArrayList<>(1);
         list.find(345);
     }
 
     @Test
     public void removesFoundElement() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(837);
         list.add(9);
@@ -201,7 +201,7 @@ public class ArrayListTest {
 
     @Test(expected = FindException.class)
     public void errorsUponNotFindingElementToRemove() {
-        ArrayList<Integer> list = new ArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
         list.remove(8237);
     }
 }

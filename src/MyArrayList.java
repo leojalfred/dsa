@@ -1,16 +1,16 @@
 import java.lang.module.FindException;
 import java.util.Arrays;
 
-public class ArrayList<E> {
+public class MyArrayList<E> {
     static final int DEFAULT_CAPACITY = 10;
     private int size = 0;
     private Object[] elements;
 
-    ArrayList() {
+    MyArrayList() {
         elements = new Object[DEFAULT_CAPACITY];
     }
 
-    ArrayList(int initialCapacity) {
+    MyArrayList(int initialCapacity) {
         if (initialCapacity < 0) throw new IndexOutOfBoundsException();
         elements = new Object[initialCapacity];
     }
