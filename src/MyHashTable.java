@@ -22,7 +22,7 @@ public class MyHashTable<K, V> {
             table[i] = new LinkedList<>();
     }
 
-    public void add(Pair<K, V> pair) {
+    public void put(Pair<K, V> pair) {
         int i = pair.getKey().hashCode() % table.length;
         for (Pair<K, V> p : table[i]) {
             if (p.getKey() == pair.getKey()) {
