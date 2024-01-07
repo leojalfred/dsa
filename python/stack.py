@@ -3,7 +3,6 @@ from __future__ import annotations
 
 class Stack[T]:
     class _StackNode[T]:
-        data: T
         next: Stack._StackNode[T] = None
 
         def __init__(self, data: T):
