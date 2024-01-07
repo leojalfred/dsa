@@ -1,17 +1,13 @@
 from __future__ import annotations
 
+from node import Node
+
 
 class Stack[T]:
-    class _StackNode[T]:
-        next: Stack._StackNode[T] = None
-
-        def __init__(self, data: T):
-            self.data = data
-
-    __top: _StackNode[T] = None
+    __top: Node[T] = None
 
     def push(self, item: T) -> None:
-        t = Stack._StackNode(item)
+        t = Node(item)
         t.next = self.__top
         self.__top = t
 

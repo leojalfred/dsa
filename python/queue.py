@@ -1,13 +1,6 @@
-from __future__ import annotations
-
 from typing import Optional
 
-
-class Node[T]:
-    next: Node[T] = None
-
-    def __init__(self, data: T):
-        self.data = data
+from node import Node
 
 
 class Queue[T]:
@@ -47,6 +40,7 @@ queue = Queue()
 queue.add(1)
 queue.add(2)
 queue.add(3)
+
 print(f'queue.peek(): {queue.peek()}')
 print(f'queue.remove()s: {queue.remove()}, {queue.remove()}, {queue.remove()}')
 print(f'queue.is_empty(): {queue.is_empty()}')
