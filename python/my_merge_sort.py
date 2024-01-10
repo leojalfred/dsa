@@ -1,4 +1,4 @@
-def merge_sort(array: list):
+def merge_sort(array: list) -> None:
     if len(array) <= 1:
         return
 
