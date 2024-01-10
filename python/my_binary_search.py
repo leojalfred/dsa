@@ -12,5 +12,6 @@ def binary_search(a, low, high, x):
         return -1
 
 
-test = [0, 1, 2, 3, 7, 9, 9, 9, 9, 9]
-print(binary_search(test, 0, len(test) - 1, 7))
+if __name__ == '__main__':
+    test = [0, 1, 2, 3, 7, 9, 9, 9, 9, 9]
+    print(binary_search(test, 0, len(test) - 1, 7))

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from node import Node
+from my_node import Node
 
 
 class Stack[T]:
@@ -30,11 +30,12 @@ class Stack[T]:
         return self.__top is None
 
 
-stack = Stack()
-stack.push(1)
-stack.push(2)
-stack.push(3)
+if __name__ == '__main__':
+    stack = Stack()
+    stack.push(1)
+    stack.push(2)
+    stack.push(3)
 
-print(f'stack.peek(): {stack.peek()}')
-print(f'stack.pop()s: {stack.pop()}, {stack.pop()}, {stack.pop()}')
-print(f'stack.is_empty(): {stack.is_empty()}')
+    print(f'stack.peek(): {stack.peek()}')
+    print(f'stack.pop()s: {stack.pop()}, {stack.pop()}, {stack.pop()}')
+    print(f'stack.is_empty(): {stack.is_empty()}')

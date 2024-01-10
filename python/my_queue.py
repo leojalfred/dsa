@@ -1,6 +1,6 @@
 from typing import Optional
 
-from node import Node
+from my_node import Node
 
 
 class Queue[T]:
@@ -35,12 +35,12 @@ class Queue[T]:
     def is_empty(self):
         return self.__first is None
 
+if __name__ == '__main__':
+    queue = Queue()
+    queue.add(1)
+    queue.add(2)
+    queue.add(3)
 
-queue = Queue()
-queue.add(1)
-queue.add(2)
-queue.add(3)
-
-print(f'queue.peek(): {queue.peek()}')
-print(f'queue.remove()s: {queue.remove()}, {queue.remove()}, {queue.remove()}')
-print(f'queue.is_empty(): {queue.is_empty()}')
+    print(f'queue.peek(): {queue.peek()}')
+    print(f'queue.remove()s: {queue.remove()}, {queue.remove()}, {queue.remove()}')
+    print(f'queue.is_empty(): {queue.is_empty()}')

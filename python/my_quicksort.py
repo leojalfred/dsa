@@ -8,5 +8,6 @@ def quicksort(array):
     return quicksort(left) + [pivot] + quicksort(right)
 
 
-test = [89, 3, -44, 787, -8888, 0]
-print(quicksort(test))
+if __name__ == '__main__':
+    test = [89, 3, -44, 787, -8888, 0]
+    print(quicksort(test))
