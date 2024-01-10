@@ -1,10 +1,11 @@
-def quicksort(array):
+def quicksort(array: list) -> list:
     if len(array) <= 1:
         return array
 
     pivot = array[0]
-    left = [x for x in array[1::] if x < pivot]
-    right = [x for x in array[1::] if x >= pivot]
+    left = [x for x in array[1:] if x <= pivot]
+    right = [x for x in array[1:] if x > pivot]
+
     return quicksort(left) + [pivot] + quicksort(right)
 
 
