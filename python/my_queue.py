@@ -35,6 +35,7 @@ class Queue[T]:
     def is_empty(self):
         return self.__first is None
 
+
 if __name__ == '__main__':
     queue = Queue()
     queue.add(1)
