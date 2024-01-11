@@ -1,6 +1,13 @@
+from __future__ import annotations
+
 from typing import Optional
 
-from my_node import Node
+
+class Node[T]:
+    next: Node[T] = None
+
+    def __init__(self, data: T):
+        self.data = data
 
 
 class Queue[T]:
