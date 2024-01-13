@@ -35,9 +35,17 @@ def post_order(node: Node, visit: Callable[[Any], None]) -> None:
 a = Node(1)
 b = Node(2)
 c = Node(3)
+d = Node(4)
+e = Node(5)
+f = Node(6)
+g = Node(7)
 
 a.left = b
 a.right = c
+b.left = d
+b.right = e
+c.left = f
+c.right = g
 
 print('Pre-Order:')
 pre_order(a, print)
