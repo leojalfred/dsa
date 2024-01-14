@@ -56,14 +56,14 @@ class MinHeap[T]:
 
 
 if __name__ == '__main__':
-    my_heap = MinHeap()
-    my_heap.insert(-213)
-    my_heap.insert(1)
-    my_heap.insert(-28467)
-    my_heap.insert(123)
-    my_heap.insert(9)
-    my_heap.insert(0)
-    my_heap.insert(8737)
+    min_heap = MinHeap()
+    min_heap.insert(-213)
+    min_heap.insert(1)
+    min_heap.insert(-28467)
+    min_heap.insert(123)
+    min_heap.insert(9)
+    min_heap.insert(0)
+    min_heap.insert(8737)
 
-    for _ in range(my_heap.size):
-        print(my_heap.extract_min())
+    for _ in range(min_heap.size):
+        print(min_heap.extract_min())
