@@ -26,7 +26,7 @@ def bfs(root: Node, visit: Callable[[Any], None]) -> None:
     root.visited = True
     queue.append(root)
 
-    while len(queue):
+    while queue:
         n = queue.popleft()
         visit(n.data)
 
