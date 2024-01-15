@@ -13,9 +13,6 @@ class Node[T]:
 
 
 def dfs(root: Node, visit: Callable[[Any], None]) -> None:
-    if root is None:
-        return
-
     visit(root.data)
     root.visited = True
 
