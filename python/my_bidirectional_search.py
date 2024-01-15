@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import deque
 from typing import Optional
 
 
@@ -15,11 +16,11 @@ class BidirectionalSearch:
         self.vertices = vertices
         self.graph: list[Optional[AdjacentNode]] = [None] * self.vertices
 
-        self.source_queue: list[int] = []
+        self.source_queue: deque[int] = deque()
         self.source_visited = [False] * self.vertices
         self.source_parent: list[Optional[int]] = [None] * self.vertices
 
-        self.destination_queue: list[int] = []
+        self.destination_queue: deque[int] = deque()
         self.destination_visited = [False] * self.vertices
         self.destination_parent: list[Optional[int]] = [None] * self.vertices
 
@@ -32,40 +33,40 @@ class BidirectionalSearch:
         node.next = self.graph[destination]
         self.graph[destination] = node
 
-    def bfs(self, direction='forward'):
-        if direction == 'forward':
-            current = self.source_queue.pop(0)
-            connected_node = self.graph[current]
+    def forward_bfs(self):
+        current = self.source_queue.popleft()
+        connected_node = self.graph[current]
 
-            while connected_node:
-                vertex = connected_node.vertex
+        while connected_node:
+            vertex = connected_node.vertex
 
-                if not self.source_visited[vertex]:
-                    self.source_queue.append(vertex)
-                    self.source_visited[vertex] = True
-                    self.source_parent[vertex] = current
+            if not self.source_visited[vertex]:
+                self.source_queue.append(vertex)
+                self.source_visited[vertex] = True
+                self.source_parent[vertex] = current
 
-                connected_node = connected_node.next
-        else:
-            current = self.destination_queue.pop(0)
-            connected_node = self.graph[current]
+            connected_node = connected_node.next
 
-            while connected_node:
-                vertex = connected_node.vertex
+    def backward_bfs(self):
+        current = self.destination_queue.popleft()
+        connected_node = self.graph[current]
 
-                if not self.destination_visited[vertex]:
-                    self.destination_queue.append(vertex)
-                    self.destination_visited[vertex] = True
-                    self.destination_parent[vertex] = current
+        while connected_node:
+            vertex = connected_node.vertex
 
-                connected_node = connected_node.next
+            if not self.destination_visited[vertex]:
+                self.destination_queue.append(vertex)
+                self.destination_visited[vertex] = True
+                self.destination_parent[vertex] = current
 
-    def is_intersecting(self) -> int:
+            connected_node = connected_node.next
+
+    def intersection(self) -> Optional[int]:
         for i in range(self.vertices):
             if self.source_visited[i] and self.destination_visited[i]:
                 return i
 
-        return -1
+        return None
 
     def print_path(self, intersecting_node: int, source: int, destination: int) -> None:
         path = [intersecting_node]
@@ -80,24 +81,23 @@ class BidirectionalSearch:
             path.append(self.destination_parent[i])
             i = self.destination_parent[i]
 
-        path_string = ' '.join(list(map(str, path)))
-        print(f'Path: {path_string}')
+        print(f'Path: {path}')
 
     def bidirectional_search(self, source: int, destination: int) -> None:
         self.source_queue.append(source)
         self.source_visited[source] = True
-        self.source_parent[source] = -1
+        self.source_parent[source] = None
 
         self.destination_queue.append(destination)
         self.destination_visited[destination] = True
-        self.destination_parent[destination] = -1
+        self.destination_parent[destination] = None
 
         while self.source_queue and self.destination_queue:
-            self.bfs(direction='forward')
-            self.bfs(direction='backward')
+            self.forward_bfs()
+            self.backward_bfs()
 
-            intersecting_node = self.is_intersecting()
-            if intersecting_node != -1:
+            intersecting_node = self.intersection()
+            if intersecting_node is not None:
                 print(f'Path exists between {source} and {destination}')
                 print(f'Intersects at: {intersecting_node}')
                 self.print_path(intersecting_node, source, destination)
