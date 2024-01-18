@@ -1,127 +1,79 @@
 from __future__ import annotations
 
 from collections import deque
-from typing import Optional
 
 
-class AdjacentNode:
-    next: AdjacentNode = None
+class Node[T]:
+    def __init__(self, val: T):
+        self.val = val
+        self.neighbors: list[Node[T]] = []
+        self.visited_right = False
+        self.visited_left = False
+        self.parent_right = None
+        self.parent_left = None
 
-    def __init__(self, vertex: int) -> None:
-        self.vertex = vertex
 
+def bidirectional_search(s: Node, t: Node):
+    def extract_path(intersecting_node: Node):
+        path = []
 
-class BidirectionalSearch:
-    def __init__(self, vertices: int) -> None:
-        self.vertices = vertices
-        self.graph: list[Optional[AdjacentNode]] = [None] * self.vertices
-
-        self.source_queue: deque[int] = deque()
-        self.source_visited = [False] * self.vertices
-        self.source_parent: list[Optional[int]] = [None] * self.vertices
-
-        self.destination_queue: deque[int] = deque()
-        self.destination_visited = [False] * self.vertices
-        self.destination_parent: list[Optional[int]] = [None] * self.vertices
-
-    def add_edge(self, source: int, destination: int) -> None:
-        node = AdjacentNode(destination)
-        node.next = self.graph[source]
-        self.graph[source] = node
-
-        node = AdjacentNode(source)
-        node.next = self.graph[destination]
-        self.graph[destination] = node
-
-    def forward_bfs(self):
-        current = self.source_queue.popleft()
-        connected_node = self.graph[current]
-
-        while connected_node:
-            vertex = connected_node.vertex
-
-            if not self.source_visited[vertex]:
-                self.source_queue.append(vertex)
-                self.source_visited[vertex] = True
-                self.source_parent[vertex] = current
-
-            connected_node = connected_node.next
-
-    def backward_bfs(self):
-        current = self.destination_queue.popleft()
-        connected_node = self.graph[current]
-
-        while connected_node:
-            vertex = connected_node.vertex
-
-            if not self.destination_visited[vertex]:
-                self.destination_queue.append(vertex)
-                self.destination_visited[vertex] = True
-                self.destination_parent[vertex] = current
-
-            connected_node = connected_node.next
-
-    def intersection(self) -> Optional[int]:
-        for i in range(self.vertices):
-            if self.source_visited[i] and self.destination_visited[i]:
-                return i
-
-        return None
-
-    def print_path(self, intersecting_node: int, source: int, destination: int) -> None:
-        path = [intersecting_node]
-        i = intersecting_node
-        while i != source:
-            path.append(self.source_parent[i])
-            i = self.source_parent[i]
+        left_node = intersecting_node
+        while left_node:
+            path.append(left_node.val)
+            left_node = left_node.parent_left
 
         path.reverse()
-        i = intersecting_node
-        while i != destination:
-            path.append(self.destination_parent[i])
-            i = self.destination_parent[i]
+        del path[-1]
 
-        print(f'Path: {path}')
+        right_node = intersecting_node
+        while right_node:
+            path.append(right_node.val)
+            right_node = right_node.parent_right
 
-    def bidirectional_search(self, source: int, destination: int) -> None:
-        self.source_queue.append(source)
-        self.source_visited[source] = True
-        self.source_parent[source] = None
+        return path
 
-        self.destination_queue.append(destination)
-        self.destination_visited[destination] = True
-        self.destination_parent[destination] = None
+    queue: deque[Node] = deque()
+    queue.append(s)
+    queue.append(t)
+    s.visited_left = True
+    t.visited_right = True
 
-        while self.source_queue and self.destination_queue:
-            self.forward_bfs()
-            self.backward_bfs()
+    while len(queue) > 0:
+        current_node = queue.pop()
 
-            intersecting_node = self.intersection()
-            if intersecting_node is not None:
-                print(f'Path exists between {source} and {destination}')
-                print(f'Intersects at: {intersecting_node}')
-                self.print_path(intersecting_node, source, destination)
+        if current_node.visited_left and current_node.visited_right:
+            return extract_path(current_node)
 
-                return
+        for neighbor_node in current_node.neighbors:
+            if current_node.visited_left and not neighbor_node.visited_left:
+                neighbor_node.parent_left = current_node
+                neighbor_node.visited_left = True
+                queue.append(neighbor_node)
+            if current_node.visited_right and not neighbor_node.visited_right:
+                neighbor_node.parent_right = current_node
+                neighbor_node.visited_right = True
+                queue.append(neighbor_node)
 
-        print(f'Path does not exist between {source} and {destination}')
+    return False
 
 
 if __name__ == '__main__':
-    graph = BidirectionalSearch(15)
-    graph.add_edge(0, 4)
-    graph.add_edge(1, 4)
-    graph.add_edge(2, 5)
-    graph.add_edge(3, 5)
-    graph.add_edge(4, 6)
-    graph.add_edge(5, 6)
-    graph.add_edge(6, 7)
-    graph.add_edge(7, 8)
-    graph.add_edge(8, 9)
-    graph.add_edge(8, 10)
-    graph.add_edge(9, 11)
-    graph.add_edge(9, 12)
-    graph.add_edge(10, 13)
-    graph.add_edge(10, 14)
+    n0 = Node(0)
+    n1 = Node(1)
+    n2 = Node(2)
+    n3 = Node(3)
+    n4 = Node(4)
+    n5 = Node(5)
+    n6 = Node(6)
+    n7 = Node(7)
 
-    graph.bidirectional_search(0, 14)
+    n0.neighbors = [n1, n5]
+    n1.neighbors = [n0, n2, n6]
+    n2.neighbors = [n1]
+    n3.neighbors = [n4, n6]
+    n4.neighbors = [n3]
+    n5.neighbors = [n0, n6]
+    n6.neighbors = [n1, n3, n5, n7]
+    n7.neighbors = [n6]
+
+    print(bidirectional_search(n0, n4))
